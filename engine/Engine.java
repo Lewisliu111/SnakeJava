@@ -104,7 +104,6 @@ public class Engine
 		getObstaculos().add();
 		getTocaTemporaria().add();
 		getTocaPermanente().add();
-
 	}
 
 	/** Executa o jogo */

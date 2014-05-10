@@ -1,9 +1,10 @@
 package gui;
 
-import java.util.TimerTask;
-import java.util.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
-public class GuiTimer extends TimerTask
+public class GuiTimer implements ActionListener
 {
 	// Constantes para o teclado
 	private static final int KEY_UP = 38;
@@ -24,7 +25,7 @@ public class GuiTimer extends TimerTask
 		super();
 
 		this.guiPanelGame = guiPanelGame;
-		this.timer = new Timer();
+		this.timer = new Timer(GuiPanelGame.WAIT_1, this);
 	}
 
 	/** Inicia */
@@ -36,11 +37,12 @@ public class GuiTimer extends TimerTask
 	/** Começa */
 	public void start(int wait)
 	{
-		getTimer().schedule(this, 0, wait);
+		getTimer().setDelay(wait);
+		getTimer().start();
 	}
 
 	/** Executa */
-	public void run()
+	public void actionPerformed(ActionEvent e)
 	{
 		if( isGameOver() )
 			return;

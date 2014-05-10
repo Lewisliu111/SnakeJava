@@ -34,16 +34,22 @@ public class Pontuacao
 		this.nivel = nivel;
 	}
 
-	/** Devolve o valor da pontuacao */
+	/** Devolve o valor da pontuação */
 	public int getValor()
 	{
 		return valor;
 	}
 
-	/** Incrementa o valor da pontuacao */
-	public void doAction()
+	/** Modifica o valor da pontuação */
+	public void setValor(int valor)
 	{
-		valor += nivel;
+		this.valor = valor;
+	}
+
+	/** Adiciona ao valor da pontuação */
+	public void addValor(int valor)
+	{
+		this.valor += valor;
 	}
 
 	/** Devolve o conteúdo do ficheiro com as pontuações */

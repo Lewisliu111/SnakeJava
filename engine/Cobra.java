@@ -104,18 +104,28 @@ public class Cobra extends Tabuleiro
 	/** Métodos a executar depois de processar o movimento */
 	private void afterMoveHook( Integer[] newPosCobraFrente )
 	{
-		// Verifica se o jogo terminou por colisão de cobra com ela própria ou paredes da arena
-		if(	newPosCobraFrente[0] >= getTabuleiro().length || newPosCobraFrente[0] < 0 ||
-			newPosCobraFrente[1] >= getTabuleiro()[0].length || newPosCobraFrente[1] < 0 ||
-			isPosTrue( newPosCobraFrente[0], newPosCobraFrente[1]) )
+		// Verifica se o jogo terminou por colisão de cobra com ela própria
+		if( isPosTrue( newPosCobraFrente[0], newPosCobraFrente[1]) )
 		{
 			getEngine().setGameOver(true);
 			return;
 		}
 
+		// Determina a nova posição
+		newPosCobraFrente[0] = determineNewPosition( newPosCobraFrente[0], getTabuleiro().length );
+		newPosCobraFrente[1] = determineNewPosition( newPosCobraFrente[1], getTabuleiro()[0].length );
+
 		// Adiciona a nova posição da frente da cobra ao ArrayList
 		posCobra.add( newPosCobraFrente );
 		setTabuleiro( newPosCobraFrente[0], newPosCobraFrente[1], true);
+	}
+
+	/** Determina a nova posição (pos) considerando o tamanho (length) */
+	private int determineNewPosition( int pos, int length )
+	{
+		pos = (pos >= length) ? 0: pos;
+		pos = (pos < 0) ? length-1: pos;
+		return pos;
 	}
 
 	/** Move a cobra para cima */

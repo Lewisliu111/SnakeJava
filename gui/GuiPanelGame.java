@@ -15,14 +15,14 @@ import util.Util;
 @SuppressWarnings({ "serial" })
 public class GuiPanelGame extends JPanel implements KeyListener
 {
+	// Constantes da velocidade
+	public static final int WAIT_1 = 200;
+	public static final int WAIT_2 = 150;
+	public static final int WAIT_3 = 100;
+	public static final int WAIT_4 = 50;
+
 	// Constante do GUI
 	private static final int tamanhoComponente = 10;
-
-	// Constantes da velocidade
-	private static final int WAIT_1 = 200;
-	private static final int WAIT_2 = 150;
-	private static final int WAIT_3 = 100;
-	private static final int WAIT_4 = 50;
 
 	// Motor de jogo
 	private Engine e;
@@ -109,12 +109,8 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		// Terminar o jogo ao haver game over
 		if( getEngine().isGameOver() )
 		{
-			if( guiTimer == null)
-				return;
-
 			// Terminar timer
-			guiTimer.getTimer().cancel();
-			guiTimer = null;
+			guiTimer.getTimer().stop();
 
 			// Adicionar a pontuação
 			getEngine().getPontuacao().add();
@@ -124,16 +120,12 @@ public class GuiPanelGame extends JPanel implements KeyListener
 	/** Captura acção de pressão de tecla (setas) */
 	public void keyPressed(KeyEvent e)
 	{
-		if( guiTimer == null) return;
-
 		guiTimer.setDireccaoCode( e.getKeyCode() ); // Mover cobra
 	}
 
 	/** Captura acção de pressão de tecla (letras/numeros) */
 	public void keyTyped(KeyEvent e)
 	{
-		if( guiTimer == null) return;
-
 		char c = e.getKeyChar();
 
 		if( Util.isInteger(c+"") )
@@ -224,37 +216,48 @@ public class GuiPanelGame extends JPanel implements KeyListener
 	/** Muda a velocidade no jogo */
 	private void mudarVelocidade(int n)
 	{
-		if( guiTimer == null) return;
-
-		int time;
+		int wait;
 
 		switch(n)
 		{
 			case 1:
-				time = WAIT_1;
+				wait = WAIT_1;
 				break;
 			case 2:
-				time = WAIT_2;
+				wait = WAIT_2;
 				break;
 			case 3:
-				time = WAIT_3;
+				wait = WAIT_3;
 				break;
 			case 4:
-				time = WAIT_4;
+				wait = WAIT_4;
 				break;
 			default:
 				return;
 		}
 
+		// Reinciar o jogo no caso de game over
+		if( getEngine().isGameOver() )
+		{
+			// Desactivar game over
+			getEngine().setGameOver(false);
+
+			// Reiniciar motor de jogo
+			getEngine().init();
+
+			// Limpar certos componentes do jogo
+			getEngine().getCobra().setDireccao('\0');
+			getEngine().getPontuacao().setValor(0);
+			getEngine().getTocaTemporaria().remove();
+
+			// Iniciar
+			guiTimer.start(wait);
+		}
+
 		// Modifica o nível da pontuação
 		getEngine().getPontuacao().setNivel(n);
 
-		// Cancela o timer
-		guiTimer.getTimer().cancel();
-		guiTimer = null;
-
-		// Criar um timer novo com a velocidade nova
-		guiTimer = new GuiTimer(this);
-		guiTimer.start(time);
+		// Modifica a velocidade
+		guiTimer.getTimer().setDelay(wait);
 	}
 }

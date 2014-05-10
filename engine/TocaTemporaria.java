@@ -57,8 +57,7 @@ public class TocaTemporaria extends Toca
 		}
 
 		// Incrementar a pontuação
-		for(int i=0; i<numRatos; i++)
-			getEngine().getPontuacao().doAction();
+		getEngine().getPontuacao().addValor(numRatos);
 
 		// Fazer crescer a cobra
 		getEngine().getCobra().setTimesNotToMovePosTras( getEngine().getCobra().getTimesNotToMovePosTras()+numRatos );

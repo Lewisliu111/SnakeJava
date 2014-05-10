@@ -29,7 +29,7 @@ public class TocaPermanente extends Toca
 			return;
 
 		// Incrementar a pontuação
-		getEngine().getPontuacao().doAction();
+		getEngine().getPontuacao().addValor(1);
 
 		// Fazer crescer a cobra
 		getEngine().getCobra().setTimesNotToMovePosTras( getEngine().getCobra().getTimesNotToMovePosTras()+1 );
