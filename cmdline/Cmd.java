@@ -1,16 +1,10 @@
 package cmdline;
 
-import engine.Arena;
-import engine.Pontuacao;
-import engine.Util;
+import util.Util;
+import engine.Engine;
 
-@SuppressWarnings("unused")
 public class Cmd
 {
-	// Constantes das pontuações
-	private static final String TOP_SCORES_FILE="TopScores.txt";
-	private static final int MAX_TOP_SCORES=10;
-
 	// Constantes para o teclado
 	private static final char KEY_UP = 'w';
 	private static final char KEY_DOWN = 's';
@@ -18,65 +12,67 @@ public class Cmd
 	private static final char KEY_RIGHT = 'd';
 
 	// Objectos
-	private Arena arena;
-	private Pontuacao pontuacao = new Pontuacao(MAX_TOP_SCORES, TOP_SCORES_FILE);
+	private Engine e;
 	private Teclado teclado = new Teclado();
 
-	/** Constructor */
+	/** Construtor */
 	public Cmd()
 	{
 		int nivelDeDificuldade = teclado.nextInt("Nivel de dificuldade [0 ou 1] >");
-		arena = new Arena( nivelDeDificuldade );
+		e = new Engine( nivelDeDificuldade );
+		e.init();
 
 		Util.println("Cima: "+KEY_UP+" | Baixo: "+KEY_DOWN+" | Esquerda: "+KEY_LEFT+" | Direita: "+KEY_RIGHT);
 
-		while( !arena.isGameOver() )
+		while( !e.isGameOver() )
 		{
 			drawArena();
 			switch( teclado.nextChar(">") )
 			{
 				case KEY_UP:
-					arena.moveCobraUp();
+					e.getCobra().setDireccao('u');
 					break;
 				case KEY_DOWN:
-					arena.moveCobraDown();
+					e.getCobra().setDireccao('d');
 					break;
 				case KEY_LEFT:
-					arena.moveCobraLeft();
+					e.getCobra().setDireccao('l');
 					break;
 				case KEY_RIGHT:
-					arena.moveCobraRight();
+					e.getCobra().setDireccao('r');
 					break;
 				default:
-					arena.moveCobraForward();
 					break;
 			}
+
+			e.run();
 		}
-		Util.println("Game Over - Pontuação: "+arena.getPontuacao());
+
+		drawArena();
+		Util.println("Game Over - Pontuação: "+e.getPontuacao().getValor());
 	}
 
 	/** Desenha tabuleiro */
 	private void drawArena()
 	{
-		boolean[][] tabuleiroCobra = arena.getTabuleiroCobra();
-		boolean[][] tabuleiroObstaculos = arena.getTabuleiroObstaculos();
-		int[] posComida = arena.getPosComida();
+		drawArenaLine(Engine.NUM_COLUMNS);
 
-		drawArenaLine(tabuleiroCobra);
-
-		for(int y=tabuleiroCobra[0].length-1; y>=0; y--)
+		for(int y=Engine.NUM_LINES; y>=0; y--)
 		{
 			Util.print('#');
 
-			for(int x=0; x<tabuleiroCobra.length; x++)
+			for(int x=0; x<Engine.NUM_COLUMNS; x++)
 			{
-				if( tabuleiroCobra[x][y] == true )
+				if( e.getCobra().isPosTrue(x,y) ) // Cobra
 					Util.print('-');
 
-				else if( x == posComida[0] && y == posComida[1] )
+				else if( e.getTocaPermanente().isPosTrue(x,y) ) // Toca Permanente
 					Util.print('+');
 
-				else if( tabuleiroObstaculos[x][y] == true )
+				else if( e.getTocaTemporaria().isPosTrue(x,y) ) // Toca Temporária
+					Util.print( e.getTocaTemporaria().getNumRatos() );
+
+				else if( e.getObstaculos().isPosTrue(x,y) ) // Obstaculos
 					Util.print('/');
 
 				else
@@ -87,20 +83,20 @@ public class Cmd
 			Util.println();
 		}
 
-		drawArenaLine(tabuleiroCobra);
+		drawArenaLine(Engine.NUM_COLUMNS);
 	}
 
 	/** Desenha a linha superior e inferior do tabuleiro */
-	private void drawArenaLine(boolean[][] tabuleiroCobra)
+	private void drawArenaLine(int length)
 	{
-		for(int x=0; x<tabuleiroCobra.length; x++)
+		for(int x=0; x<length; x++)
 		{
 			if( x==0 )
 				Util.print('#');
 
 			Util.print('#');
 
-			if( x==tabuleiroCobra.length-1 )
+			if( x==length-1 )
 				Util.print('#');
 		}
 		Util.println();

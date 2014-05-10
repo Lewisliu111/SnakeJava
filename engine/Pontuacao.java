@@ -5,20 +5,48 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Scanner;
+import util.Util;
 
 public class Pontuacao
 {
-	private int maxTopScores;
-	private String topScoresFile;
+	// Objecto do motor de jogo
+	private Engine e;
 
-	/** Constructor */
-	public Pontuacao(int maxTopScores, String topScoresFile)
+	// Variáveis da pontuação
+	private int valor = 0;
+	private int nivel = 1;
+
+	/** Construtor */
+	public Pontuacao(Engine e)
 	{
-		this.maxTopScores = maxTopScores;
-		this.topScoresFile = topScoresFile;
+		this.e = e;
 	}
 
-	/** Retorna o conteúdo do ficheiro com as pontuações */
+	/** Devolve o nível da pontuacao */
+	public int getNivel()
+	{
+		return nivel;
+	}
+
+	/** Modifica o nível da pontuacao */
+	public void setNivel(int nivel)
+	{
+		this.nivel = nivel;
+	}
+
+	/** Devolve o valor da pontuacao */
+	public int getValor()
+	{
+		return valor;
+	}
+
+	/** Incrementa o valor da pontuacao */
+	public void doAction()
+	{
+		valor += nivel;
+	}
+
+	/** Devolve o conteúdo do ficheiro com as pontuações */
 	public String toString()
 	{
 		String ret = new String("");
@@ -26,7 +54,7 @@ public class Pontuacao
 		Scanner in;
 		try
 		{
-			in = new Scanner( new File(topScoresFile) );
+			in = new Scanner( new File(Engine.TOP_SCORES_FILE) );
 		}
 		catch (FileNotFoundException e)
 		{
@@ -42,7 +70,7 @@ public class Pontuacao
 	}
 
 	/** Adiciona uma pontuação ao ficheiro das pontuações */
-	public boolean add( int pontos, String jogador )
+	public boolean add()
 	{
 		// Obter pontuações
 		String contents = toString();
@@ -51,7 +79,7 @@ public class Pontuacao
 		PrintStream out;
 		try
 		{
-			out = new PrintStream( new File(topScoresFile) );
+			out = new PrintStream( new File(Engine.TOP_SCORES_FILE) );
 		}
 		catch (FileNotFoundException e)
 		{
@@ -63,12 +91,12 @@ public class Pontuacao
 			out.print(contents);
 
 		// Adicionar nova pontuação
-		out.println(pontos+"\t"+jogador);
+		out.println(valor+"\t"+e.getNomeJogador());
 
 		// Fechar o ficheiro
 		out.close();
 
-		// Correr a função de ordenação e retornar o seu resultado
+		// Correr a função de ordenação e Devolver o seu resultado
 		return sort();
 	}
 
@@ -90,9 +118,12 @@ public class Pontuacao
 		{
 			String[] scoresTemp = scoresArr[i].trim().split("\t");
 
-			scoresVals[i] = Util.parseInt( scoresTemp[0] ); // Valor
-			scoresNomes[i][0] = scoresTemp[0]; // Valor
-			scoresNomes[i][1] = scoresTemp[1]; // Nome
+			if( !scoresTemp[1].isEmpty() ) // Nome
+			{
+				scoresVals[i] = Util.parseInt( scoresTemp[0] ); // Valor
+				scoresNomes[i][0] = scoresTemp[0]; // Valor
+				scoresNomes[i][1] = scoresTemp[1]; // Nome
+			}
 		}
 
 		// Ordenar scoreVals
@@ -102,7 +133,7 @@ public class Pontuacao
 		PrintStream out;
 		try
 		{
-			out = new PrintStream( new File(topScoresFile) );
+			out = new PrintStream( new File(Engine.TOP_SCORES_FILE) );
 		}
 		catch (FileNotFoundException e)
 		{
@@ -113,7 +144,7 @@ public class Pontuacao
 		for(int i=0; i<scoresArr.length; i++)
 		{
 			// Para só escrever até ao máximo de pontuações
-			if( i>=maxTopScores )
+			if( i>=Engine.MAX_TOP_SCORES )
 				break;
 
 			int pos = scoresArr.length-1-i; // Posição do valor
@@ -130,7 +161,10 @@ public class Pontuacao
 				}
 			}
 
-			out.println(valor+"\t"+nome); // Escrever
+			if( !nome.isEmpty() )
+			{
+				out.println(valor+"\t"+nome); // Escrever
+			}
 		}
 
 		// Fechar o ficheiro

@@ -1,13 +1,13 @@
 package cmdline;
 
 import java.util.Scanner;
-import engine.Util;
+import util.Util;
 
 public class Teclado
 {
 	private static Scanner scanner = new Scanner(System.in);
 
-	/** Constructor deixado vazio intencionalmente */
+	/** Construtor deixado vazio intencionalmente */
 	public Teclado(){}
 
 	/** Ler string */

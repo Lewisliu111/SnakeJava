@@ -1,4 +1,4 @@
-package engine;
+package util;
 
 public class Util
 {
@@ -61,7 +61,7 @@ public class Util
 		return true;
 	}
 
-	/** Retorna um inteiro obtido a partir da String */
+	/** Devolve um inteiro obtido a partir da String */
 	public static int parseInt( String txt )
 	{
 		txt = txt.trim();
@@ -75,7 +75,7 @@ public class Util
 	}
 
 	/**
-	 * Retorna o resultado de um número 'n' elevado à potência 'pow'.
+	 * Devolve o resultado de um número 'n' elevado à potência 'pow'.
 	 * Só usar para 'n' e 'pow' positivos.
 	 */
 	public static int powInt( int n, int pow )
