@@ -8,7 +8,7 @@ public class Cobra extends Tabuleiro
 	private ArrayList<Integer[]> posCobra = new ArrayList<Integer[]>();
 	private char direccao;
 
-	// Número de vezes a não mover a posição de trás da cobra
+	// NÃºmero de vezes a nÃ£o mover a posiÃ§Ã£o de trÃ¡s da cobra
 	private int timesNotToMovePosTras = 0;
 
 	/** Construtor */
@@ -17,19 +17,19 @@ public class Cobra extends Tabuleiro
 		super(e);
 	}
 
-	/** Devolve o ArrayList contendo as posições da cobra ordenadas */
+	/** Devolve o ArrayList contendo as posiÃ§Ãµes da cobra ordenadas */
 	public ArrayList<Integer[]> getPosCobra()
 	{
 		return posCobra;
 	}
 
-	/** Devolve a direcção da cobra */
+	/** Devolve a direcÃ§Ã£o da cobra */
 	public char getDireccao()
 	{
 		return direccao;
 	}
 
-	/** Define a direcção da cobra */
+	/** Define a direcÃ§Ã£o da cobra */
 	public void setDireccao(char novaDireccao)
 	{
 		if( (this.direccao == 'u' && novaDireccao == 'd') ||
@@ -43,13 +43,13 @@ public class Cobra extends Tabuleiro
 		this.direccao = novaDireccao;
 	}
 
-	/** Devolve o número de vezes a não mover a posição de trás da cobra */
+	/** Devolve o nÃºmero de vezes a nÃ£o mover a posiÃ§Ã£o de trÃ¡s da cobra */
 	public int getTimesNotToMovePosTras()
 	{
 		return timesNotToMovePosTras;
 	}
 
-	/** Define o número de vezes a não mover a posição de trás da cobra */
+	/** Define o nÃºmero de vezes a nÃ£o mover a posiÃ§Ã£o de trÃ¡s da cobra */
 	public void setTimesNotToMovePosTras(int timesNotToMovePosTras)
 	{
 		this.timesNotToMovePosTras = timesNotToMovePosTras;
@@ -101,26 +101,26 @@ public class Cobra extends Tabuleiro
 		setTabuleiro( posCobraFrente[0], posCobraFrente[1], true);
 	}
 
-	/** Métodos a executar depois de processar o movimento */
+	/** MÃ©todos a executar depois de processar o movimento */
 	private void afterMoveHook( Integer[] newPosCobraFrente )
 	{
-		// Verifica se o jogo terminou por colisão de cobra com ela própria
+		// Verifica se o jogo terminou por colisÃ£o de cobra com ela prÃ³pria
 		if( isPosTrue( newPosCobraFrente[0], newPosCobraFrente[1]) )
 		{
 			getEngine().setGameOver(true);
 			return;
 		}
 
-		// Determina a nova posição
+		// Determina a nova posiÃ§Ã£o
 		newPosCobraFrente[0] = determineNewPosition( newPosCobraFrente[0], getTabuleiro().length );
 		newPosCobraFrente[1] = determineNewPosition( newPosCobraFrente[1], getTabuleiro()[0].length );
 
-		// Adiciona a nova posição da frente da cobra ao ArrayList
+		// Adiciona a nova posiÃ§Ã£o da frente da cobra ao ArrayList
 		posCobra.add( newPosCobraFrente );
 		setTabuleiro( newPosCobraFrente[0], newPosCobraFrente[1], true);
 	}
 
-	/** Determina a nova posição (pos) considerando o tamanho (length) */
+	/** Determina a nova posiÃ§Ã£o (pos) considerando o tamanho (length) */
 	private int determineNewPosition( int pos, int length )
 	{
 		pos = (pos >= length) ? 0: pos;
@@ -176,17 +176,17 @@ public class Cobra extends Tabuleiro
 		afterMoveHook(newPosCobraFrente);
 	}
 
-	/** Move a posição de trás da cobra para a frente */
+	/** Move a posiÃ§Ã£o de trÃ¡s da cobra para a frente */
 	private void movePosTrasForward()
 	{
-		// Fazer crescer a cobra não movendo a posição de trás
+		// Fazer crescer a cobra nÃ£o movendo a posiÃ§Ã£o de trÃ¡s
 		if( timesNotToMovePosTras > 0 )
 		{
 			timesNotToMovePosTras--;
 			return;
 		}
 
-		// Mover a posição de trás da cobra para a frente
+		// Mover a posiÃ§Ã£o de trÃ¡s da cobra para a frente
 		if( posCobra.size() > 1)
 		{
 			Integer[] posCobraTras = posCobra.get(0);

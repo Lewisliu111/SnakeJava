@@ -7,10 +7,10 @@ public class Toca
 	// Objecto do motor de jogo
 	private Engine e;
 
-	// Gerador de números aleatórios
+	// Gerador de nÃºmeros aleatÃ³rios
 	private Aleatorio aleatorio = new Aleatorio();
 
-	// Posição da toca
+	// PosiÃ§Ã£o da toca
 	private Integer[] posToca = new Integer[2];
 
 	/** Constructor */
@@ -25,19 +25,19 @@ public class Toca
 		return e;
 	}
 
-	/** Devolve o objecto do gerador de números aleatórios */
+	/** Devolve o objecto do gerador de nÃºmeros aleatÃ³rios */
 	public Aleatorio getAleatorio()
 	{
 		return aleatorio;
 	}
 
-	/** Devolve a posição da toca */
+	/** Devolve a posiÃ§Ã£o da toca */
 	public Integer[] getPosToca()
 	{
 		return posToca;
 	}
 
-	/** Modifica a posição da toca */
+	/** Modifica a posiÃ§Ã£o da toca */
 	public void setPosToca(Integer[] posToca)
 	{
 		this.posToca = posToca;
@@ -51,19 +51,19 @@ public class Toca
 		return isTocaNull() ? false : getEngine().getCobra().isPosTrue(posToca[0], posToca[1]);
 	}
 
-	/** Verifica se não existe toca */
+	/** Verifica se nÃ£o existe toca */
 	public boolean isTocaNull()
 	{
 		return (posToca == null || posToca[0] == null || posToca[1] == null );
 	}
 
-	/** Verifica se a posição x,y existe e é verdadeira */
+	/** Verifica se a posiÃ§Ã£o x,y existe e Ã© verdadeira */
 	public boolean isPosTrue( int x, int y)
 	{
 		return isTocaNull() ? false : ( x == posToca[0] && y == posToca[1] );
 	}
 
-	/** Verifica se uma posição x,y está vazia */
+	/** Verifica se uma posiÃ§Ã£o x,y estÃ¡ vazia */
 	public boolean isPosFree( int x, int y)
 	{
 		// Comparar

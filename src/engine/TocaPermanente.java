@@ -22,13 +22,13 @@ public class TocaPermanente extends Toca
 		setPosToca(posNewToca);
 	}
 
-	/** Método de acção */
+	/** MÃ©todo de acÃ§Ã£o */
 	public void doAction()
 	{
 		if( !check() )
 			return;
 
-		// Incrementar a pontuação
+		// Incrementar a pontuaÃ§Ã£o
 		getEngine().getPontuacao().addValor(1);
 
 		// Fazer crescer a cobra

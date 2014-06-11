@@ -49,7 +49,7 @@ public class Cmd
 		}
 
 		drawArena();
-		Util.println("Game Over - PontuaÁ„o: "+e.getPontuacao().getValor());
+		Util.println("Game Over - Pontua√ß√£o: "+e.getPontuacao().getValor());
 	}
 
 	/** Desenha tabuleiro */
@@ -69,7 +69,7 @@ public class Cmd
 				else if( e.getTocaPermanente().isPosTrue(x,y) ) // Toca Permanente
 					Util.print('+');
 
-				else if( e.getTocaTemporaria().isPosTrue(x,y) ) // Toca Tempor·ria
+				else if( e.getTocaTemporaria().isPosTrue(x,y) ) // Toca Tempor√°ria
 					Util.print( e.getTocaTemporaria().getNumRatos() );
 
 				else if( e.getObstaculos().isPosTrue(x,y) ) // Obstaculos

@@ -2,7 +2,7 @@ package engine;
 
 public class Engine
 {
-	// Constantes das pontuações
+	// Constantes das pontuaÃ§Ãµes
 	public static final String TOP_SCORES_FILE="TopScores.txt";
 	public static final int MAX_TOP_SCORES=10;
 
@@ -17,7 +17,7 @@ public class Engine
 	private TocaPermanente tocaPermanente;
 	private TocaTemporaria tocaTemporaria;
 
-	// Variáveis do jogo
+	// VariÃ¡veis do jogo
 	private int nivelDeDificuldade;
 	private boolean gameOver = false;
 

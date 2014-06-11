@@ -2,7 +2,7 @@ import cmdline.Cmd;
 
 public class SnakeCmd
 {
-	/** Método principal */
+	/** MÃ©todo principal */
 	public static void main(String[] args)
 	{
 		new Cmd();

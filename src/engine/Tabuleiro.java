@@ -26,13 +26,13 @@ public class Tabuleiro
 		return tabuleiro;
 	}
 
-	/** Modifica a posição x,y do tabuleiro para o estado */
+	/** Modifica a posiÃ§Ã£o x,y do tabuleiro para o estado */
 	public void setTabuleiro( int x, int y, boolean estado )
 	{
 		tabuleiro[x][y] = estado;
 	}
 
-	/** Verifica se a posição x,y existe e é verdadeira */
+	/** Verifica se a posiÃ§Ã£o x,y existe e Ã© verdadeira */
 	public boolean isPosTrue( int x, int y)
 	{
 		if( x < 0 || x >= getTabuleiro().length || y < 0 || y >= getTabuleiro()[0].length )

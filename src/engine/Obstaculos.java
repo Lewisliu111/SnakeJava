@@ -4,7 +4,7 @@ import util.Aleatorio;
 
 public class Obstaculos extends Tabuleiro
 {
-	// Gerador de números aleatórios
+	// Gerador de nÃºmeros aleatÃ³rios
 	private Aleatorio aleatorio = new Aleatorio();
 
 	/** Construtor */
@@ -54,7 +54,7 @@ public class Obstaculos extends Tabuleiro
 		return true;
 	}
 
-	/** Método de acção */
+	/** MÃ©todo de acÃ§Ã£o */
 	public void doAction()
 	{
 		if( !check() )

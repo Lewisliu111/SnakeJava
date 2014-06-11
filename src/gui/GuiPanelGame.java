@@ -43,7 +43,7 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		int sizeX = Engine.NUM_COLUMNS * tamanhoComponente;
 		int sizeY = Engine.NUM_LINES * tamanhoComponente;
 
-		// Para o Y aparecer duas posiÁıes abaixo
+		// Para o Y aparecer duas posi√ß√µes abaixo
 		sizeY += 2*tamanhoComponente;
 
 		// Definir tamanho
@@ -57,8 +57,8 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		setFocusable(true);
 		addKeyListener(this);
 
-		// Obst·culos
-		int obstaculos = JOptionPane.showConfirmDialog(this, "Colocar obst·culos", "", JOptionPane.YES_NO_OPTION);
+		// Obst√°culos
+		int obstaculos = JOptionPane.showConfirmDialog(this, "Colocar obst√°culos", "", JOptionPane.YES_NO_OPTION);
 
 		if( obstaculos == JOptionPane.YES_OPTION )
 			this.e = new Engine(1);
@@ -98,7 +98,7 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		return e;
 	}
 
-	/** Desenha a interface gr·fica */
+	/** Desenha a interface gr√°fica */
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -112,18 +112,18 @@ public class GuiPanelGame extends JPanel implements KeyListener
 			// Terminar timer
 			guiTimer.getTimer().stop();
 
-			// Adicionar a pontuaÁ„o
+			// Adicionar a pontua√ß√£o
 			getEngine().getPontuacao().add();
 		}
 	}
 
-	/** Captura acÁ„o de press„o de tecla (setas) */
+	/** Captura ac√ß√£o de press√£o de tecla (setas) */
 	public void keyPressed(KeyEvent e)
 	{
 		guiTimer.setDireccaoCode( e.getKeyCode() ); // Mover cobra
 	}
 
-	/** Captura acÁ„o de press„o de tecla (letras/numeros) */
+	/** Captura ac√ß√£o de press√£o de tecla (letras/numeros) */
 	public void keyTyped(KeyEvent e)
 	{
 		char c = e.getKeyChar();
@@ -134,9 +134,9 @@ public class GuiPanelGame extends JPanel implements KeyListener
 			guiTimer.setDireccaoChar(c); // Mover cobra
 	}
 
-	public void keyReleased(KeyEvent e){ /* N„o implementado */ }
+	public void keyReleased(KeyEvent e){ /* N√£o implementado */ }
 
-	/** Desenha o jogo na interface gr·fica */
+	/** Desenha o jogo na interface gr√°fica */
 	private void paintJogo(Graphics g)
 	{
 		// Desenhar
@@ -158,7 +158,7 @@ public class GuiPanelGame extends JPanel implements KeyListener
 				{
 					rectanguloJogo(g, Color.RED, x, drawY);
 				}
-				else if( getEngine().getTocaTemporaria().isPosTrue(x,y) ) // Toca Tempor·ria
+				else if( getEngine().getTocaTemporaria().isPosTrue(x,y) ) // Toca Tempor√°ria
 				{
 					drawTocaTemporaria(g, x, drawY);
 				}
@@ -166,7 +166,7 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		}
 	}
 
-	/** Desenha a pontuaÁ„o na interface gr·fica */
+	/** Desenha a pontua√ß√£o na interface gr√°fica */
 	private void paintPontuacao(Graphics g)
 	{
 		linhaTabuleiro(g, Color.ORANGE, 20);
@@ -179,10 +179,10 @@ public class GuiPanelGame extends JPanel implements KeyListener
 			g.drawString(Integer.toString( getEngine().getPontuacao().getValor() )+" Pontos", 15, 15);
 	}
 
-	/** Cria um rect‚ngulo de um componente do jogo no tabuleiro */
+	/** Cria um rect√¢ngulo de um componente do jogo no tabuleiro */
 	private void rectanguloJogo(Graphics g, Color c, int x, int y)
 	{
-		y += 2; // Para o Y aparecer duas posiÁıes abaixo
+		y += 2; // Para o Y aparecer duas posi√ß√µes abaixo
 		x *= tamanhoComponente;
 		y *= tamanhoComponente;
 
@@ -190,18 +190,18 @@ public class GuiPanelGame extends JPanel implements KeyListener
 		g.fillRect(x, y, tamanhoComponente, tamanhoComponente);
 	}
 
-	/** Desenha uma toca tempor·ria */
+	/** Desenha uma toca tempor√°ria */
 	private void drawTocaTemporaria(Graphics g, int x, int y)
 	{
-		y += 2; // Para o Y aparecer duas posiÁıes abaixo
+		y += 2; // Para o Y aparecer duas posi√ß√µes abaixo
 		x *= tamanhoComponente;
 		y *= tamanhoComponente;
 
-		// Desenha o rect‚ngulo
+		// Desenha o rect√¢ngulo
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, tamanhoComponente, tamanhoComponente);
 
-		// Desenha o n˙mero de ratos na toca
+		// Desenha o n√∫mero de ratos na toca
 		g.setColor(Color.BLACK);
 		g.drawString(Integer.toString( getEngine().getTocaTemporaria().getNumRatos() ), x, y);
 	}
@@ -254,7 +254,7 @@ public class GuiPanelGame extends JPanel implements KeyListener
 			guiTimer.start(wait);
 		}
 
-		// Modifica o nÌvel da pontuaÁ„o
+		// Modifica o n√≠vel da pontua√ß√£o
 		getEngine().getPontuacao().setNivel(n);
 
 		// Modifica a velocidade

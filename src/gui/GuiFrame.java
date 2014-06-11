@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 @SuppressWarnings({ "serial" })
 public class GuiFrame extends JFrame
 {
-	/** Construtor público */
+	/** Construtor pÃºblico */
 	public GuiFrame()
 	{
 		javax.swing.SwingUtilities.invokeLater(
@@ -19,7 +19,7 @@ public class GuiFrame extends JFrame
 		super(name);
 	}
 
-	/** Interface Gráfica */
+	/** Interface GrÃ¡fica */
 	private void gui()
 	{
 		// Criar janela

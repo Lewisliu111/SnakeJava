@@ -12,7 +12,7 @@ public class Pontuacao
 	// Objecto do motor de jogo
 	private Engine e;
 
-	// Variáveis da pontuação
+	// VariÃ¡veis da pontuaÃ§Ã£o
 	private int valor = 0;
 	private int nivel = 1;
 
@@ -22,37 +22,37 @@ public class Pontuacao
 		this.e = e;
 	}
 
-	/** Devolve o nível da pontuacao */
+	/** Devolve o nÃ­vel da pontuacao */
 	public int getNivel()
 	{
 		return nivel;
 	}
 
-	/** Modifica o nível da pontuacao */
+	/** Modifica o nÃ­vel da pontuacao */
 	public void setNivel(int nivel)
 	{
 		this.nivel = nivel;
 	}
 
-	/** Devolve o valor da pontuação */
+	/** Devolve o valor da pontuaÃ§Ã£o */
 	public int getValor()
 	{
 		return valor;
 	}
 
-	/** Modifica o valor da pontuação */
+	/** Modifica o valor da pontuaÃ§Ã£o */
 	public void setValor(int valor)
 	{
 		this.valor = valor;
 	}
 
-	/** Adiciona ao valor da pontuação */
+	/** Adiciona ao valor da pontuaÃ§Ã£o */
 	public void addValor(int valor)
 	{
 		this.valor += valor;
 	}
 
-	/** Devolve o conteúdo do ficheiro com as pontuações */
+	/** Devolve o conteÃºdo do ficheiro com as pontuaÃ§Ãµes */
 	public String toString()
 	{
 		String ret = new String("");
@@ -75,10 +75,10 @@ public class Pontuacao
 		return ret;
 	}
 
-	/** Adiciona uma pontuação ao ficheiro das pontuações */
+	/** Adiciona uma pontuaÃ§Ã£o ao ficheiro das pontuaÃ§Ãµes */
 	public boolean add()
 	{
-		// Obter pontuações
+		// Obter pontuaÃ§Ãµes
 		String contents = toString();
 
 		// Preparar para escrita
@@ -92,30 +92,30 @@ public class Pontuacao
 			return false;
 		}
 
-		// Escrever os conteúdos do ficheiro
+		// Escrever os conteÃºdos do ficheiro
 		if(contents != null)
 			out.print(contents);
 
-		// Adicionar nova pontuação
+		// Adicionar nova pontuaÃ§Ã£o
 		out.println(valor+"\t"+e.getNomeJogador());
 
 		// Fechar o ficheiro
 		out.close();
 
-		// Correr a função de ordenação e Devolver o seu resultado
+		// Correr a funÃ§Ã£o de ordenaÃ§Ã£o e Devolver o seu resultado
 		return sort();
 	}
 
-	/** Organiza o ficheiro das pontuações */
+	/** Organiza o ficheiro das pontuaÃ§Ãµes */
 	private boolean sort()
 	{
-		// Obter pontuações
+		// Obter pontuaÃ§Ãµes
 		String contents = toString();
 
 		if(contents == null)
 			return false;
 
-		String[] scoresArr = contents.split( Util.EOL ); // Array de pontuações
+		String[] scoresArr = contents.split( Util.EOL ); // Array de pontuaÃ§Ãµes
 		int[] scoresVals = new int[ scoresArr.length ]; // Array com valores
 		String[][] scoresNomes = new String[ scoresArr.length ][2]; // Array com valores e nomes
 
@@ -149,11 +149,11 @@ public class Pontuacao
 		// Escrever no ficheiro
 		for(int i=0; i<scoresArr.length; i++)
 		{
-			// Para só escrever até ao máximo de pontuações
+			// Para sÃ³ escrever atÃ© ao mÃ¡ximo de pontuaÃ§Ãµes
 			if( i>=Engine.MAX_TOP_SCORES )
 				break;
 
-			int pos = scoresArr.length-1-i; // Posição do valor
+			int pos = scoresArr.length-1-i; // PosiÃ§Ã£o do valor
 			int valor = scoresVals[pos]; // Valor
 
 			// Encontrar o nome

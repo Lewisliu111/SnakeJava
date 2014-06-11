@@ -12,7 +12,7 @@ public class GuiTimer implements ActionListener
 	private static final int KEY_LEFT = 37;
 	private static final int KEY_RIGHT = 39;
 
-	// DirecÁ„o
+	// Direc√ß√£o
 	private int direccaoCode;
 
 	// Objectos
@@ -34,7 +34,7 @@ public class GuiTimer implements ActionListener
 		guiPanelGame.getEngine().init();
 	}
 
-	/** ComeÁa */
+	/** Come√ßa */
 	public void start(int wait)
 	{
 		getTimer().setDelay(wait);
@@ -116,7 +116,7 @@ public class GuiTimer implements ActionListener
 		return guiPanelGame.getEngine().isGameOver();
 	}
 
-	/** Desenha a cobra na interface gr·fica */
+	/** Desenha a cobra na interface gr√°fica */
 	private void desenharCobra()
 	{
 		guiPanelGame.repaint();
